@@ -1,5 +1,6 @@
 package com.iot.resources;
 
+import com.iot.inmemory.Roles;
 import com.iot.model.IotUser;
 import com.iot.util.PBKDF2Encoder;
 import graphql.GraphQLException;
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @GraphQLApi
+@RolesAllowed({Roles.USER, Roles.ADMIN})
 public class IotUserGql {
 
     @Query("allIotUsers")
@@ -38,7 +40,6 @@ public class IotUserGql {
         return IotUser.find("userId", userId).firstResult();
     }
 
-    @RolesAllowed({"USER", "ADMIN"})
     @Query("iotUsersWithId")
     public IotUser iotUsersWithId(Long id) {
         return IotUser.findById(id);
@@ -58,14 +59,12 @@ public class IotUserGql {
         throw new GraphQLException("User id not available");
     }
 
-    @RolesAllowed({"USER", "ADMIN"})
     @Transactional
     @Mutation("updateIotUser")
     public IotUser updateObject(IotUser t) {
         return t.getEntityManager().merge(t);
     }
 
-    @RolesAllowed({"USER", "ADMIN"})
     @Transactional
     @Mutation("deleteIotUser")
     public boolean deleteObject(Long id) {

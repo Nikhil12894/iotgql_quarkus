@@ -16,9 +16,4 @@ public class IotRole extends PanacheEntity {
 
     public Boolean canDoAction;
 
-    // https://www.baeldung.com/role-and-privilege-for-spring-security-registration
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "roles_privileges", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
-//    public Collection<Privilege> privileges;
-
 }

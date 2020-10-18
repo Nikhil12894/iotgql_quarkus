@@ -5,10 +5,12 @@ import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 
+import javax.annotation.security.RolesAllowed;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @GraphQLApi
+@RolesAllowed({ "ADMIN" })
 public class IOTRoleGql {
     @Query("allIotRole")
     public List<IotRole> allIotUsers() {
